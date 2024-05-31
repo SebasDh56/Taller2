@@ -1,0 +1,251 @@
+<html>
+<head>
+<title>Ventana.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6a8759;}
+.s3 { color: #808080;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Ventana.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax.swing.*</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javax.swing.event.ListSelectionEvent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">javax.swing.event.ListSelectionListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.event.ActionEvent</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.awt.event.ActionListener</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.List</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">Ventana {</span>
+    <span class="s0">private </span><span class="s1">JPanel Ventana</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JTabbedPane tabbedPane1</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JSpinner spinner1</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JComboBox comboBox1</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JComboBox comboBox2</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JTextField textField1</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JButton agregarButton</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JTextField textField2</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JButton totalPaquetesButton</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JComboBox comboBox3</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JButton totalPesoButton</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JComboBox comboBox4</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JButton totalPesoPorCiudadButton1</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JList list1</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JButton modificarButton</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JButton ordenarButton</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JList list2</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JTextField textField3</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JButton buscarButton</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JTextArea textArea1</span><span class="s0">;</span>
+    <span class="s0">private </span><span class="s1">JList list3</span><span class="s0">;</span>
+    <span class="s0">public </span><span class="s1">Lista paquetes = </span><span class="s0">new </span><span class="s1">Lista()</span><span class="s0">;</span>
+
+    <span class="s0">public </span><span class="s1">Ventana() {</span>
+        <span class="s1">quemarDatos()</span><span class="s0">;</span>
+        <span class="s1">LlenarJlist()</span><span class="s0">;</span>
+
+        <span class="s1">agregarButton.addActionListener(</span><span class="s0">new </span><span class="s1">ActionListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed(ActionEvent e) {</span>
+                <span class="s0">try </span><span class="s1">{</span>
+                    <span class="s1">paquetes.adicionarElementos(</span><span class="s0">new </span><span class="s1">Paqueteria(Integer.parseInt(spinner1.getValue().toString())</span><span class="s0">,</span>
+                            <span class="s1">Double.parseDouble(textField2.getText())</span><span class="s0">,</span>
+                            <span class="s1">comboBox1.getSelectedItem().toString()</span><span class="s0">,</span>
+                            <span class="s1">comboBox2.getSelectedItem().toString()</span><span class="s0">,</span>
+                            <span class="s1">textField1.getText()</span><span class="s0">,</span>
+                            <span class="s2">&quot;Receptado&quot;</span><span class="s1">))</span><span class="s0">;</span>
+
+                    <span class="s1">JOptionPane.showMessageDialog(</span><span class="s0">null, </span><span class="s2">&quot;Paquete agregado&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                    <span class="s1">limpiarDatos()</span><span class="s0">;</span>
+                    <span class="s1">LlenarJlist()</span><span class="s0">;</span>
+                    <span class="s1">System.out.println(paquetes.listarPaquetes())</span><span class="s0">;</span>
+                <span class="s1">}</span><span class="s0">catch</span><span class="s1">(Exception ex){</span>
+                    <span class="s1">JOptionPane.showMessageDialog(</span><span class="s0">null, </span><span class="s1">ex.getMessage())</span><span class="s0">;</span>
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">totalPaquetesButton.addActionListener(</span><span class="s0">new </span><span class="s1">ActionListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed(ActionEvent e) {</span>
+                <span class="s1">JOptionPane.showMessageDialog(</span><span class="s0">null, </span><span class="s2">&quot;El total de paquetes es: &quot; </span><span class="s1">+ paquetes.sumarTotal())</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+
+        <span class="s1">totalPesoPorCiudadButton1.addActionListener(</span><span class="s0">new </span><span class="s1">ActionListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed(ActionEvent e) {</span>
+                <span class="s1">String selectedCity = comboBox3.getSelectedItem().toString()</span><span class="s0">;</span>
+                <span class="s1">System.out.println(</span><span class="s2">&quot;Ciudad seleccionada: &quot; </span><span class="s1">+ selectedCity)</span><span class="s0">; </span><span class="s3">// Mensaje de depuración</span>
+                <span class="s0">double </span><span class="s1">totalWeight = paquetes.sumarTotalPesoCuidad(selectedCity)</span><span class="s0">;</span>
+                <span class="s1">JOptionPane.showMessageDialog(</span><span class="s0">null, </span><span class="s2">&quot;El total de peso de la ciudad &quot; </span><span class="s1">+ selectedCity + </span><span class="s2">&quot; es: &quot; </span><span class="s1">+ totalWeight)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+
+        <span class="s1">list1.addListSelectionListener(</span><span class="s0">new </span><span class="s1">ListSelectionListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">valueChanged(ListSelectionEvent e) {</span>
+                <span class="s0">if </span><span class="s1">(list1.getSelectedIndex() != -</span><span class="s4">1</span><span class="s1">) {</span>
+                    <span class="s0">int </span><span class="s1">indice = list1.getSelectedIndex()</span><span class="s0">;</span>
+                    <span class="s1">Paqueteria pa = paquetes.getEntrega().get(indice)</span><span class="s0">;</span>
+                    <span class="s1">spinner1.setValue(pa.getTracking())</span><span class="s0">;</span>
+                    <span class="s1">comboBox1.setSelectedItem(pa.getCedulaReceptor())</span><span class="s0">;</span>
+                    <span class="s1">comboBox2.setSelectedItem(pa.getCiudadEntrega())</span><span class="s0">;</span>
+                    <span class="s1">textField1.setText(</span><span class="s2">&quot; &quot; </span><span class="s1">+ pa.getCedulaReceptor())</span><span class="s0">;</span>
+                    <span class="s1">textField2.setText(</span><span class="s2">&quot; &quot; </span><span class="s1">+ pa.getPeso())</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">modificarButton.addActionListener(</span><span class="s0">new </span><span class="s1">ActionListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed(ActionEvent e) {</span>
+                <span class="s0">if </span><span class="s1">(list1.getSelectedIndex() != -</span><span class="s4">1</span><span class="s1">) {</span>
+                    <span class="s0">int </span><span class="s1">indice = list1.getSelectedIndex()</span><span class="s0">;</span>
+                    <span class="s1">Paqueteria pa = paquetes.getEntrega().get(indice)</span><span class="s0">;</span>
+                    <span class="s1">pa.setTracking(Integer.parseInt(spinner1.getValue().toString()))</span><span class="s0">;</span>
+                    <span class="s1">pa.setPeso(Double.parseDouble(textField2.getText()))</span><span class="s0">;</span>
+                    <span class="s1">pa.setCiudadEntrega(comboBox1.getSelectedItem().toString())</span><span class="s0">;</span>
+                    <span class="s1">pa.setCiudadRecepcion(comboBox2.getSelectedItem().toString())</span><span class="s0">;</span>
+                    <span class="s1">pa.setCedulaReceptor(textField1.getText())</span><span class="s0">;</span>
+
+                    <span class="s1">LlenarJlist()</span><span class="s0">;</span>
+                    <span class="s1">limpiarDatos()</span><span class="s0">;</span>
+                    <span class="s1">JOptionPane.showMessageDialog(</span><span class="s0">null, </span><span class="s2">&quot;Paquete modificado&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                    <span class="s1">JOptionPane.showMessageDialog(</span><span class="s0">null, </span><span class="s2">&quot;Seleccione un paquete para modificar&quot;</span><span class="s1">)</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+        <span class="s1">buscarButton.addActionListener(</span><span class="s0">new </span><span class="s1">ActionListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed(ActionEvent e) {</span>
+                <span class="s0">int </span><span class="s1">tracking = Integer.parseInt(textField3.getText())</span><span class="s0">;</span>
+                <span class="s1">busquedaBinaria(tracking)</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+
+
+        <span class="s1">ordenarButton.addActionListener(</span><span class="s0">new </span><span class="s1">ActionListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed(ActionEvent e) {</span>
+                <span class="s1">ordenarBurbuja()</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+        <span class="s1">totalPesoButton.addActionListener(</span><span class="s0">new </span><span class="s1">ActionListener() {</span>
+            <span class="s1">@Override</span>
+            <span class="s0">public void </span><span class="s1">actionPerformed(ActionEvent e) {</span>
+                <span class="s1">JOptionPane.showMessageDialog(</span><span class="s0">null, </span><span class="s2">&quot;El total de peso es: &quot; </span><span class="s1">+ paquetes.sumarTotalPeso())</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">})</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">quemarDatos() {</span>
+        <span class="s0">try </span><span class="s1">{</span>
+            <span class="s1">paquetes.adicionarElementos(</span><span class="s0">new </span><span class="s1">Paqueteria(</span><span class="s4">15</span><span class="s0">, </span><span class="s4">140.47</span><span class="s0">, </span><span class="s2">&quot;Quito&quot;</span><span class="s0">, </span><span class="s2">&quot;Cuenca&quot;</span><span class="s0">, </span><span class="s2">&quot;1747651043&quot;</span><span class="s0">,</span><span class="s2">&quot;Receptado&quot;</span><span class="s1">))</span><span class="s0">;</span>
+            <span class="s1">paquetes.adicionarElementos(</span><span class="s0">new </span><span class="s1">Paqueteria(</span><span class="s4">10</span><span class="s0">, </span><span class="s4">50.00</span><span class="s0">, </span><span class="s2">&quot;Quito&quot;</span><span class="s0">, </span><span class="s2">&quot;Cuenca&quot;</span><span class="s0">, </span><span class="s2">&quot;1045310245&quot;</span><span class="s0">,</span><span class="s2">&quot;Receptado&quot;</span><span class="s1">))</span><span class="s0">;</span>
+            <span class="s1">paquetes.adicionarElementos(</span><span class="s0">new </span><span class="s1">Paqueteria(</span><span class="s4">19</span><span class="s0">, </span><span class="s4">47.38</span><span class="s0">, </span><span class="s2">&quot;Guayaquil&quot;</span><span class="s0">, </span><span class="s2">&quot;Quito&quot;</span><span class="s0">, </span><span class="s2">&quot;1704679137&quot;</span><span class="s0">,</span><span class="s2">&quot;Receptado&quot;</span><span class="s1">))</span><span class="s0">;</span>
+            <span class="s1">paquetes.adicionarElementos(</span><span class="s0">new </span><span class="s1">Paqueteria(</span><span class="s4">20</span><span class="s0">, </span><span class="s4">100.00</span><span class="s0">, </span><span class="s2">&quot;Quito&quot;</span><span class="s0">, </span><span class="s2">&quot;Cuenca&quot;</span><span class="s0">, </span><span class="s2">&quot;1700463105&quot;</span><span class="s0">,</span><span class="s2">&quot;Receptado&quot;</span><span class="s1">))</span><span class="s0">;</span>
+            <span class="s1">paquetes.adicionarElementos(</span><span class="s0">new </span><span class="s1">Paqueteria(</span><span class="s4">06</span><span class="s0">, </span><span class="s4">101.00</span><span class="s0">, </span><span class="s2">&quot;Cuenca&quot;</span><span class="s0">, </span><span class="s2">&quot;Quito&quot;</span><span class="s0">, </span><span class="s2">&quot;1750958567&quot;</span><span class="s0">,</span><span class="s2">&quot;Receptado&quot;</span><span class="s1">))</span><span class="s0">;</span>
+            <span class="s1">paquetes.adicionarElementos(</span><span class="s0">new </span><span class="s1">Paqueteria(</span><span class="s4">21</span><span class="s0">, </span><span class="s4">20.00</span><span class="s0">, </span><span class="s2">&quot;Cuenca&quot;</span><span class="s0">, </span><span class="s2">&quot;Quito&quot;</span><span class="s0">, </span><span class="s2">&quot;1747958567&quot;</span><span class="s0">,</span><span class="s2">&quot;Receptado&quot;</span><span class="s1">))</span><span class="s0">;</span>
+            <span class="s1">paquetes.adicionarElementos(</span><span class="s0">new </span><span class="s1">Paqueteria(</span><span class="s4">17</span><span class="s0">, </span><span class="s4">10.78</span><span class="s0">, </span><span class="s2">&quot;Cuenca&quot;</span><span class="s0">, </span><span class="s2">&quot;Quito&quot;</span><span class="s0">, </span><span class="s2">&quot;1755447633&quot;</span><span class="s0">,</span><span class="s2">&quot;Receptado&quot;</span><span class="s1">))</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">catch </span><span class="s1">(Exception ex) {</span>
+            <span class="s1">ex.printStackTrace()</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">LlenarJlist() {</span>
+        <span class="s1">DefaultListModel&lt;String&gt; lista = </span><span class="s0">new </span><span class="s1">DefaultListModel&lt;&gt;()</span><span class="s0">;</span>
+        <span class="s1">list1.setModel(lista)</span><span class="s0">; </span><span class="s3">// Limpiar lista antes de agregar nuevos elementos</span>
+        <span class="s0">for </span><span class="s1">(Paqueteria pa : paquetes.getEntrega()) {</span>
+            <span class="s1">lista.addElement(pa.toString())</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">LlenarJlist2() {</span>
+        <span class="s1">DefaultListModel&lt;String&gt; lista = </span><span class="s0">new </span><span class="s1">DefaultListModel&lt;&gt;()</span><span class="s0">;</span>
+        <span class="s1">list2.setModel(lista)</span><span class="s0">; </span><span class="s3">// Limpiar lista antes de agregar nuevos elementos</span>
+        <span class="s0">for </span><span class="s1">(Paqueteria pa : paquetes.getEntrega()) {</span>
+            <span class="s1">lista.addElement(pa.toString())</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+
+    <span class="s0">public void </span><span class="s1">ordenarBurbuja(){</span>
+        <span class="s1">List&lt;Paqueteria&gt; entregas = paquetes.getEntrega()</span><span class="s0">;</span>
+        <span class="s1">LlenarJlist2()</span><span class="s0">; </span><span class="s3">// Llenar list3 antes de ordenar para que se actualice con los datos originales</span>
+        <span class="s0">int </span><span class="s1">n = entregas.size()</span><span class="s0">;</span>
+        <span class="s1">Paqueteria aux</span><span class="s0">;</span>
+        <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">i = </span><span class="s4">0</span><span class="s0">; </span><span class="s1">i &lt; n - </span><span class="s4">1</span><span class="s0">; </span><span class="s1">i++) {</span>
+            <span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">j = </span><span class="s4">0</span><span class="s0">; </span><span class="s1">j &lt; n - i - </span><span class="s4">1</span><span class="s0">; </span><span class="s1">j++) {</span>
+                <span class="s0">if </span><span class="s1">(entregas.get(j).getPeso() &gt; entregas.get(j + </span><span class="s4">1</span><span class="s1">).getPeso()) {</span>
+                    <span class="s1">aux = entregas.get(j)</span><span class="s0">;</span>
+                    <span class="s1">entregas.set(j</span><span class="s0">, </span><span class="s1">entregas.get(j + </span><span class="s4">1</span><span class="s1">))</span><span class="s0">;</span>
+                    <span class="s1">entregas.set(j + </span><span class="s4">1</span><span class="s0">, </span><span class="s1">aux)</span><span class="s0">;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+        <span class="s1">LlenarJlist2()</span><span class="s0">;</span>
+    <span class="s1">}</span>
+    <span class="s0">public void </span><span class="s1">busquedaBinaria(</span><span class="s0">int </span><span class="s1">tracking) {</span>
+        <span class="s1">List&lt;Paqueteria&gt; entregas = paquetes.getEntrega()</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">inicio = </span><span class="s4">1</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">fin = entregas.size() - </span><span class="s4">1</span><span class="s0">;</span>
+        <span class="s0">int </span><span class="s1">indice = -</span><span class="s4">1</span><span class="s0">;</span>
+
+        <span class="s0">while </span><span class="s1">(inicio &lt;= fin) {</span>
+            <span class="s0">int </span><span class="s1">medio = inicio + (fin - inicio) / </span><span class="s4">2</span><span class="s0">;</span>
+            <span class="s1">Paqueteria paquete = entregas.get(medio)</span><span class="s0">;</span>
+            <span class="s0">if </span><span class="s1">(paquete.getTracking() == tracking) {</span>
+                <span class="s1">indice = medio</span><span class="s0">;</span>
+                <span class="s0">break;</span>
+            <span class="s1">} </span><span class="s0">else if </span><span class="s1">(paquete.getTracking() &lt; tracking) {</span>
+                <span class="s1">inicio = medio + </span><span class="s4">1</span><span class="s0">;</span>
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">fin = medio - </span><span class="s4">1</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+
+        <span class="s0">if </span><span class="s1">(indice != -</span><span class="s4">1</span><span class="s1">) {</span>
+            <span class="s1">Paqueteria paqueteEncontrado = entregas.get(indice)</span><span class="s0">;</span>
+            <span class="s1">textArea1.setText(paqueteEncontrado.toString())</span><span class="s0">;</span>
+        <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+            <span class="s1">textArea1.setText(</span><span class="s2">&quot;Paquete no encontrado&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+
+    <span class="s0">public void </span><span class="s1">limpiarDatos(){</span>
+        <span class="s1">spinner1.setValue(</span><span class="s4">0</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">spinner1.setValue(</span><span class="s4">0</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">comboBox1.setSelectedIndex(</span><span class="s4">0</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">comboBox2.setSelectedIndex(</span><span class="s4">0</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">comboBox3.setSelectedIndex(</span><span class="s4">0</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">comboBox4.setSelectedIndex(</span><span class="s4">0</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">textField1.setText(</span><span class="s2">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">textField2.setText(</span><span class="s2">&quot;&quot;</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public static void </span><span class="s1">main(String[] args) {</span>
+        <span class="s1">JFrame frame = </span><span class="s0">new </span><span class="s1">JFrame(</span><span class="s2">&quot;Ventana&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">frame.setContentPane(</span><span class="s0">new </span><span class="s1">Ventana().Ventana)</span><span class="s0">;</span>
+        <span class="s1">frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)</span><span class="s0">;</span>
+        <span class="s1">frame.pack()</span><span class="s0">;</span>
+        <span class="s1">frame.setVisible(</span><span class="s0">true</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+<span class="s1">}</span>
+</pre>
+</body>
+</html>
